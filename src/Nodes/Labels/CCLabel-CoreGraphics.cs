@@ -433,8 +433,6 @@ namespace CocosSharp
             textDef.Dimensions.Width *= contentScaleFactorWidth;
             textDef.Dimensions.Height *= contentScaleFactorHeight;
 
-            bool hasPremultipliedAlpha;
-
             // font
             UIFont font = null;
 
@@ -609,6 +607,12 @@ namespace CocosSharp
                     context.Dispose ();
                     context = null;
                 }
+
+                font.Dispose ();
+                font = null;
+                nsparagraphStyle.Dispose ();
+                nsparagraphStyle = null;
+
                 if (stringWithAttributes != null) 
                 {
                     stringWithAttributes.Dispose ();
