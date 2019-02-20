@@ -11,6 +11,7 @@ while [ "$1" != "" ]; do
 done
 
 git checkout master
+git pull
 echo "update all submodules"
 git submodule update --init
 echo "create buildable monogame projects"
