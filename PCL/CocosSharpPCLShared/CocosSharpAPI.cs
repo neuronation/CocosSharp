@@ -2294,6 +2294,7 @@ namespace CocosSharp {
         public virtual void Visit(ref CocosSharp.CCAffineTransform parentWorldTransform) { }
         protected virtual void VisitRenderer(ref CocosSharp.CCAffineTransform worldTransform) { }
         public CocosSharp.CCPoint WorldToParentspace(CocosSharp.CCPoint point) { return default(CocosSharp.CCPoint); }
+        public virtual void Boobies() { }
     }
     public partial class CCNodeGrid : CocosSharp.CCNode {
         public CCNodeGrid() { }
