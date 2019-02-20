@@ -12,3 +12,6 @@
 [submodule "src/external lib/ChipmunkSharp"]
 	path = src/external lib/ChipmunkSharp
 	url = https://github.com/netonjm/ChipmunkSharp.git
+[submodule "app_c_sharp_exercise_engine"]
+	path = app_c_sharp_exercise_engine
+	url = https://github.com/neuronation/app_c_sharp_exercise_engine
