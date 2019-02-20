@@ -76,7 +76,7 @@ namespace CocosSharp
     public class CCNode : ICCUpdatable, ICCFocusable, IComparer<CCNode>, IComparable<CCNode>
     {
         // Use this to determine if a tag has been set on the node.
-        public const int TagInvalid = -1;                               
+        public const int TagInvalid = -1;
 
         bool ignoreAnchorPointForPosition;
         bool isCleaned = false;
@@ -123,26 +123,26 @@ namespace CocosSharp
         List<CCEventListener> toBeAddedListeners;                       // The listeners to be added lazily when an EventDispatcher is not yet available
 
 #if USE_PHYSICS
-		CCPhysicsBody _physicsBody;        ///< the physicsBody the node have
-		float _physicsScaleStartX;         ///< the scale x value when setPhysicsBody
-		float _physicsScaleStartY;         ///< the scale y value when setPhysicsBody
+        CCPhysicsBody _physicsBody;        ///< the physicsBody the node have
+        float _physicsScaleStartX;         ///< the scale x value when setPhysicsBody
+        float _physicsScaleStartY;         ///< the scale y value when setPhysicsBody
 #endif
 
-		struct lazyAction
-		{
-			public CCAction Action;
-			public CCNode Target;
-			public bool Paused;
+        struct lazyAction
+        {
+            public CCAction Action;
+            public CCNode Target;
+            public bool Paused;
 
-			public lazyAction(CCAction action, CCNode target, bool paused = false)
-			{
-				Action = action;
-				Target = target;
-				Paused = paused;
-			}
-		}
+            public lazyAction(CCAction action, CCNode target, bool paused = false)
+            {
+                Action = action;
+                Target = target;
+                Paused = paused;
+            }
+        }
 
-		List<lazyAction> toBeAddedActions;                       // The Actions to be added lazily when an ActionManager is not yet available
+        List<lazyAction> toBeAddedActions;                       // The Actions to be added lazily when an ActionManager is not yet available
 
         struct lazySchedule
         {
@@ -222,10 +222,10 @@ namespace CocosSharp
             }
         }
 
-        public virtual bool IsOpacityCascaded 
-        { 
+        public virtual bool IsOpacityCascaded
+        {
             get { return isOpacityCascaded; }
-            set 
+            set
             {
                 if (isOpacityCascaded == value)
                     return;
@@ -244,10 +244,10 @@ namespace CocosSharp
             }
         }
 
-        public virtual bool IsColorCascaded 
-        { 
+        public virtual bool IsColorCascaded
+        {
             get { return isColorCascaded; }
-            set 
+            set
             {
                 if (isColorCascaded == value)
                     return;
@@ -284,10 +284,10 @@ namespace CocosSharp
             }
         }
 
-        public byte DisplayedOpacity 
-        { 
+        public byte DisplayedOpacity
+        {
             get { return displayedOpacity; }
-            protected set 
+            protected set
             {
                 displayedOpacity = value;
             }
@@ -319,14 +319,14 @@ namespace CocosSharp
             get { return zOrder; }
             set
             {
-                if(zOrder != value)
+                if (zOrder != value)
                 {
                     if (Parent != null)
                         Parent.ReorderChild(this, value);
-                    
+
                     zOrder = value;
 
-                    if(EventDispatcher != null)
+                    if (EventDispatcher != null)
                         EventDispatcher.MarkDirty = this;
                 }
             }
@@ -334,10 +334,10 @@ namespace CocosSharp
 
         public int NumberOfRunningActions
         {
-            get { return ActionManager != null ? ActionManager.NumberOfRunningActionsInTarget (this) : 0; }
+            get { return ActionManager != null ? ActionManager.NumberOfRunningActionsInTarget(this) : 0; }
         }
 
-        public virtual float VertexZ 
+        public virtual float VertexZ
         {
             get { return vertexZ; }
             set
@@ -359,10 +359,10 @@ namespace CocosSharp
                 transformIsDirty = true;
 
 #if USE_PHYSICS
-				if (_physicsBody != null)
-				{
-					CCLog.Log("Node WARNING: PhysicsBody doesn't support setSkewX");
-				}
+                if (_physicsBody != null)
+                {
+                    CCLog.Log("Node WARNING: PhysicsBody doesn't support setSkewX");
+                }
 #endif
 
             }
@@ -377,10 +377,10 @@ namespace CocosSharp
                 transformIsDirty = true;
 
 #if USE_PHYSICS
-				if (_physicsBody != null)
-				{
-					CCLog.Log("Node WARNING: PhysicsBody doesn't support setSkewY");
-				}
+                if (_physicsBody != null)
+                {
+                    CCLog.Log("Node WARNING: PhysicsBody doesn't support setSkewY");
+                }
 #endif
 
             }
@@ -395,10 +395,10 @@ namespace CocosSharp
                 transformIsDirty = true;
 
 #if USE_PHYSICS
-				if (_physicsBody == null || !_physicsBody._rotationResetTag)
-				{
-					UpdatePhysicsBodyRotation(Scene);
-				}
+                if (_physicsBody == null || !_physicsBody._rotationResetTag)
+                {
+                    UpdatePhysicsBodyRotation(Scene);
+                }
 #endif
 
             }
@@ -433,7 +433,7 @@ namespace CocosSharp
                 transformIsDirty = true;
 
 #if USE_PHYSICS
-				UpdatePhysicsBodyTransform(Scene);
+                UpdatePhysicsBodyTransform(Scene);
 #endif
 
             }
@@ -448,7 +448,7 @@ namespace CocosSharp
                 transformIsDirty = true;
 
 #if USE_PHYSICS
-				UpdatePhysicsBodyTransform(Scene);
+                UpdatePhysicsBodyTransform(Scene);
 #endif
 
             }
@@ -463,7 +463,7 @@ namespace CocosSharp
                 transformIsDirty = true;
 
 #if USE_PHYSICS
-				UpdatePhysicsBodyTransform(Scene);
+                UpdatePhysicsBodyTransform(Scene);
 #endif
 
             }
@@ -481,11 +481,11 @@ namespace CocosSharp
             set { Position = new CCPoint(position.X, value); }
         }
 
-        public CCColor3B DisplayedColor 
-        { 
-            get { return displayedColor; } 
-            protected set 
-            { 
+        public CCColor3B DisplayedColor
+        {
+            get { return displayedColor; }
+            protected set
+            {
                 displayedColor = value;
             }
         }
@@ -506,16 +506,16 @@ namespace CocosSharp
             get { return position; }
             set
             {
-                if (position != value || value == CCPoint.Zero) 
+                if (position != value || value == CCPoint.Zero)
                 {
                     position = value;
                     transformIsDirty = true;
 
 #if USE_PHYSICS
-					if (_physicsBody == null || !_physicsBody._positionResetTag)
-					{
-						UpdatePhysicsBodyPosition(Scene);
-					}
+                    if (_physicsBody == null || !_physicsBody._positionResetTag)
+                    {
+                        UpdatePhysicsBodyPosition(Scene);
+                    }
 #endif
 
                 }
@@ -524,9 +524,9 @@ namespace CocosSharp
 
         public virtual CCPoint PositionWorldspace
         {
-            get 
+            get
             {
-                CCAffineTransform parentWorldTransform 
+                CCAffineTransform parentWorldTransform
                 = Parent != null ? Parent.AffineWorldTransform : CCAffineTransform.Identity;
 
                 return parentWorldTransform.Transform(Position);
@@ -538,8 +538,8 @@ namespace CocosSharp
         public virtual CCPoint AnchorPointInPoints
         {
             get { return anchorPointInPoints; }
-            internal set 
-            { 
+            internal set
+            {
                 anchorPointInPoints = value;
                 transformIsDirty = true;
             }
@@ -553,13 +553,13 @@ namespace CocosSharp
             {
 
 #if USE_PHYSICS
-				if (_physicsBody != null)
-				{
+                if (_physicsBody != null)
+                {
                     if (!value.Equals(CCPoint.AnchorMiddle))
-					    CCLog.Log("Node warning: This node has a physics body, the anchor must be in the middle, you cann't change this to other value.");
+                        CCLog.Log("Node warning: This node has a physics body, the anchor must be in the middle, you cann't change this to other value.");
                     else
-					    UpdatePhysicsBodyPosition(Scene);
-				}
+                        UpdatePhysicsBodyPosition(Scene);
+                }
 #endif
 
                 if (!value.Equals(anchorPoint))
@@ -573,10 +573,10 @@ namespace CocosSharp
 
         public virtual CCSize ScaledContentSize
         {
-            get 
+            get
             {
                 var sizeToScale = ContentSize;
-                return new CCSize(sizeToScale.Width * ScaleX, sizeToScale.Height * ScaleY); 
+                return new CCSize(sizeToScale.Width * ScaleX, sizeToScale.Height * ScaleY);
             }
         }
 
@@ -602,7 +602,7 @@ namespace CocosSharp
             {
                 CCPoint boundingBoxOrigin = Position;
 
-                if(!IgnoreAnchorPointForPosition) 
+                if (!IgnoreAnchorPointForPosition)
                 {
                     boundingBoxOrigin -= AnchorPointInPoints;
                 }
@@ -614,37 +614,37 @@ namespace CocosSharp
         // Bounding box after scale/rotation/skew in parent space
         public CCRect BoundingBoxTransformedToParent
         {
-            get 
-            { 
+            get
+            {
                 CCAffineTransform localTransform = AffineLocalTransform;
                 CCRect transformedBounds = localTransform.Transform(new CCRect(0.0f, 0.0f, ContentSize.Width, ContentSize.Height));
-                return transformedBounds; 
+                return transformedBounds;
             }
         }
 
         // Bounding box after scale/rotation/skew in world space
         public CCRect BoundingBoxTransformedToWorld
         {
-            get 
-            { 
+            get
+            {
                 CCAffineTransform localTransform = AffineWorldTransform;
                 CCRect worldtransformedBounds = localTransform.Transform(new CCRect(0.0f, 0.0f, ContentSize.Width, ContentSize.Height));
-                return worldtransformedBounds; 
+                return worldtransformedBounds;
             }
         }
 
         public virtual CCAffineTransform AffineLocalTransform
         {
-            get { if(transformIsDirty) UpdateTransform(); return affineLocalTransform; }
+            get { if (transformIsDirty) UpdateTransform(); return affineLocalTransform; }
         }
 
         public CCAffineTransform AffineWorldTransform
         {
-            get 
+            get
             {
                 CCAffineTransform worldTransform = AffineLocalTransform;
                 CCNode parent = this.Parent;
-                if (parent != null) 
+                if (parent != null)
                 {
                     var parentTransform = parent.AffineWorldTransform;
                     CCAffineTransform.Concat(ref worldTransform, ref parentTransform, out worldTransform);
@@ -657,9 +657,9 @@ namespace CocosSharp
         public CCAffineTransform AdditionalTransform
         {
             get { return additionalTransform; }
-            set 
+            set
             {
-                if (value != additionalTransform) 
+                if (value != additionalTransform)
                 {
                     additionalTransform = value;
                     transformIsDirty = true;
@@ -671,35 +671,35 @@ namespace CocosSharp
         {
             get { return GetChildByTag(tag); }
         }
-            
+
         public virtual CCScene Scene
         {
             get { return scene; }
-            internal set 
+            internal set
             {
-                if(scene != value) 
+                if (scene != value)
                 {
-                    
+
                     scene = value;
 
                     // All the children should belong to same scene
-                    if (Children != null) 
+                    if (Children != null)
                     {
-                        foreach (CCNode child in Children) 
+                        foreach (CCNode child in Children)
                         {
                             child.Scene = scene;
                         }
                     }
 
-                    if (scene != null) 
+                    if (scene != null)
                     {
-                        
+
                         OnSceneViewportChanged(this, null);
 
                         AddedToScene();
 
                         AttachActions();
-                        AttachSchedules ();
+                        AttachSchedules();
                     }
 
                     AttachEvents();
@@ -707,33 +707,33 @@ namespace CocosSharp
             }
         }
 
-        public virtual CCLayer Layer 
+        public virtual CCLayer Layer
         {
             get { return layer; }
-            internal set 
+            internal set
             {
-                if (layer != value) 
+                if (layer != value)
                 {
-                    if (layer != null) 
+                    if (layer != null)
                     {
-                        layer.LayerVisibleBoundsChanged -= 
+                        layer.LayerVisibleBoundsChanged -=
                             new CocosSharp.CCLayer.LayerVisibleBoundsChangedEventHandler(OnLayerVisibleBoundsChanged);
                     }
 
                     layer = value;
 
                     // All the children should belong to same layer
-                    if (Children != null) 
+                    if (Children != null)
                     {
-                        foreach (CCNode child in Children) 
+                        foreach (CCNode child in Children)
                         {
                             child.Layer = layer;
                         }
                     }
 
-                    if (layer != null) 
+                    if (layer != null)
                     {
-                        layer.LayerVisibleBoundsChanged += 
+                        layer.LayerVisibleBoundsChanged +=
                                         new CocosSharp.CCLayer.LayerVisibleBoundsChangedEventHandler(OnLayerVisibleBoundsChanged);
 
                         OnLayerVisibleBoundsChanged(this, null);
@@ -745,9 +745,9 @@ namespace CocosSharp
             }
         }
 
-        public CCNode Parent 
-        { 
-            get { return parent; } 
+        public CCNode Parent
+        {
+            get { return parent; }
             internal set
             {
                 if (parent != value)
@@ -765,7 +765,7 @@ namespace CocosSharp
         }
 
         public virtual CCDirector Director
-        { 
+        {
             get { return Scene.Director; }
             set { Scene.Director = value; }
         }
@@ -773,10 +773,10 @@ namespace CocosSharp
         public virtual CCCamera Camera
         {
             get { return (Layer == null) ? null : Layer.Camera; }
-            set 
-            { 
+            set
+            {
                 if (Layer != null)
-                    Layer.Camera = value; 
+                    Layer.Camera = value;
             }
         }
 
@@ -790,13 +790,13 @@ namespace CocosSharp
             get { return GameView != null ? GameView.Renderer : DrawManager.Renderer; }
         }
 
-        internal CCDrawManager DrawManager 
+        internal CCDrawManager DrawManager
         {
             get { return GameView != null ? GameView.DrawManager : CCDrawManager.SharedDrawManager; }
         }
 
-        internal virtual CCEventDispatcher EventDispatcher 
-        { 
+        internal virtual CCEventDispatcher EventDispatcher
+        {
             get { return Scene != null ? Scene.EventDispatcher : null; }
         }
 
@@ -810,12 +810,12 @@ namespace CocosSharp
             }
         }
 
-        internal CCPoint3 FauxLocalCameraCenter 
-        { 
+        internal CCPoint3 FauxLocalCameraCenter
+        {
             get { return fauxLocalCameraCenter; }
-            set 
+            set
             {
-                if (fauxLocalCameraCenter != value) 
+                if (fauxLocalCameraCenter != value)
                 {
                     fauxLocalCameraCenter = value;
                     transformIsDirty = true;
@@ -824,11 +824,11 @@ namespace CocosSharp
         }
 
         internal CCPoint3 FauxLocalCameraTarget
-        { 
+        {
             get { return fauxLocalCameraTarget; }
-            set 
+            set
             {
-                if (fauxLocalCameraTarget != value) 
+                if (fauxLocalCameraTarget != value)
                 {
                     fauxLocalCameraTarget = value;
                     transformIsDirty = true;
@@ -837,11 +837,11 @@ namespace CocosSharp
         }
 
         internal CCPoint3 FauxLocalCameraUpDirection
-        { 
+        {
             get { return fauxLocalCameraUpDirection; }
-            set 
+            set
             {
-                if (fauxLocalCameraUpDirection != value) 
+                if (fauxLocalCameraUpDirection != value)
                 {
                     fauxLocalCameraUpDirection = value;
                     transformIsDirty = true;
@@ -872,9 +872,9 @@ namespace CocosSharp
         public CCNode()
         {
 #if USE_PHYSICS
-			_physicsBody = null;
-			_physicsScaleStartX = 1.0f;
-			_physicsScaleStartY = 1.0f;
+            _physicsBody = null;
+            _physicsScaleStartX = 1.0f;
+            _physicsScaleStartY = 1.0f;
 #endif
 
             additionalTransform = CCAffineTransform.Identity;
@@ -895,214 +895,214 @@ namespace CocosSharp
 
             FauxLocalCameraUpDirection = new CCPoint3(0.0f, 1.0f, 0.0f);
         }
-            
+
         #endregion Constructors
 
 
-		#region Physics
+        #region Physics
 
 #if USE_PHYSICS
 
-		void UpdatePhysicsBodyTransform(CCScene scene)
-		{
-			UpdatePhysicsBodyScale(scene);
-			UpdatePhysicsBodyPosition(scene);
-			UpdatePhysicsBodyRotation(scene);
-		}
+        void UpdatePhysicsBodyTransform(CCScene scene)
+        {
+            UpdatePhysicsBodyScale(scene);
+            UpdatePhysicsBodyPosition(scene);
+            UpdatePhysicsBodyRotation(scene);
+        }
 
-		void UpdatePhysicsBodyPosition(CCScene scene)
-		{
-			if (_physicsBody != null)
-			{
-				//_physicsBody.Position = new cpVect(PositionX, PositionY);
+        void UpdatePhysicsBodyPosition(CCScene scene)
+        {
+            if (_physicsBody != null)
+            {
+                //_physicsBody.Position = new cpVect(PositionX, PositionY);
 
-				if (scene != null && scene.PhysicsWorld != null)
-				{
-					var pos = Parent == scene ? Position : scene.WorldToParentspace(Position);
+                if (scene != null && scene.PhysicsWorld != null)
+                {
+                    var pos = Parent == scene ? Position : scene.WorldToParentspace(Position);
                     _physicsBody.Position = Position;//new cpVect(PositionX, PositionY);
-				}
-				else
-				{
-					_physicsBody.Position = Position;
-				}
-			}
+                }
+                else
+                {
+                    _physicsBody.Position = Position;
+                }
+            }
 
-			if (Children != null)
-			{
-				foreach (var child in Children)
-				{
-					if (child != null)
-						child.UpdatePhysicsBodyPosition(scene);
-				}
-			}
-		}
+            if (Children != null)
+            {
+                foreach (var child in Children)
+                {
+                    if (child != null)
+                        child.UpdatePhysicsBodyPosition(scene);
+                }
+            }
+        }
 
-		void UpdatePhysicsBodyRotation(CCScene scene)
-		{
-			//if (_physicsBody != null)
-			//{
-			//	if (scene != null && scene.GetPhysicsWorld() != null)
-			//	{
-			//		float rotation = _rotationZ_X;
-			//		for (CCNode parent = Parent; parent != scene; parent = parent.Parent)
-			//		{
-			//			rotation += parent.Rotation;
-			//		}
-			//		_physicsBody.SetRotation(rotation);
-			//	}
-			//	else
-			//	{
-			//		_physicsBody.SetRotation(_rotationZ_X);
-			//	}
-			//}
+        void UpdatePhysicsBodyRotation(CCScene scene)
+        {
+            //if (_physicsBody != null)
+            //{
+            //  if (scene != null && scene.GetPhysicsWorld() != null)
+            //  {
+            //      float rotation = _rotationZ_X;
+            //      for (CCNode parent = Parent; parent != scene; parent = parent.Parent)
+            //      {
+            //          rotation += parent.Rotation;
+            //      }
+            //      _physicsBody.SetRotation(rotation);
+            //  }
+            //  else
+            //  {
+            //      _physicsBody.SetRotation(_rotationZ_X);
+            //  }
+            //}
 
-			//foreach (var child in Children)
-			//{
-			//	child.UpdatePhysicsBodyRotation(scene);
-			//	child.UpdatePhysicsBodyPosition(scene);
-			//}
-		}
+            //foreach (var child in Children)
+            //{
+            //  child.UpdatePhysicsBodyRotation(scene);
+            //  child.UpdatePhysicsBodyPosition(scene);
+            //}
+        }
 
-		void UpdatePhysicsBodyScale(CCScene scene)
-		{
+        void UpdatePhysicsBodyScale(CCScene scene)
+        {
 
-			if (_physicsBody != null)
-			{
+            if (_physicsBody != null)
+            {
 
-				if (scene != null && scene.PhysicsWorld != null)
-				{
-					float scaleX = this.scaleX / _physicsScaleStartX;
-					float scaleY = this.scaleY / _physicsScaleStartY;
-					for (CCNode parent = Parent; parent != scene; parent = parent.Parent)
-					{
-						scaleX *= parent.ScaleX;
-						scaleY *= parent.ScaleY;
-					}
-					_physicsBody.SetScale(scaleX, scaleY);
-				}
-				else
-				{
-					_physicsBody.SetScale(scaleX / _physicsScaleStartX, scaleY / _physicsScaleStartY);
-				}
-			}
+                if (scene != null && scene.PhysicsWorld != null)
+                {
+                    float scaleX = this.scaleX / _physicsScaleStartX;
+                    float scaleY = this.scaleY / _physicsScaleStartY;
+                    for (CCNode parent = Parent; parent != scene; parent = parent.Parent)
+                    {
+                        scaleX *= parent.ScaleX;
+                        scaleY *= parent.ScaleY;
+                    }
+                    _physicsBody.SetScale(scaleX, scaleY);
+                }
+                else
+                {
+                    _physicsBody.SetScale(scaleX / _physicsScaleStartX, scaleY / _physicsScaleStartY);
+                }
+            }
 
-			if (Children != null)
-			{
-				foreach (var child in Children)
-				{
-					child.UpdatePhysicsBodyRotation(scene);
-					child.UpdatePhysicsBodyPosition(scene);
-				}
+            if (Children != null)
+            {
+                foreach (var child in Children)
+                {
+                    child.UpdatePhysicsBodyRotation(scene);
+                    child.UpdatePhysicsBodyPosition(scene);
+                }
 
-			}
+            }
 
 
-		}
+        }
 
-		/** *   set the PhysicsBody that let the sprite effect with physics * @note This method will set anchor point to Vec2::ANCHOR_MIDDLE if body not null, and you cann't change anchor point if node has a physics body. */
+        /** *   set the PhysicsBody that let the sprite effect with physics * @note This method will set anchor point to Vec2::ANCHOR_MIDDLE if body not null, and you cann't change anchor point if node has a physics body. */
 
-		public CCPhysicsBody PhysicsBody
-		{
-			get { return _physicsBody; }
-			set
-			{
+        public CCPhysicsBody PhysicsBody
+        {
+            get { return _physicsBody; }
+            set
+            {
 
-				var body = value;
-				if (_physicsBody == body)
-				{
-					return;
-				}
+                var body = value;
+                if (_physicsBody == body)
+                {
+                    return;
+                }
 
-				if (body != null)
-				{
-					if (body.Node != null)
-					{
-						body.Node.PhysicsBody = null;
-					}
+                if (body != null)
+                {
+                    if (body.Node != null)
+                    {
+                        body.Node.PhysicsBody = null;
+                    }
 
-					body._node = this;
-					//body->retain();
+                    body._node = this;
+                    //body->retain();
 
-					// physics rotation based on body position, but node rotation based on node anthor point
-					// it cann't support both of them, so I clear the anthor point to default.
-					if (AnchorPoint != CCPoint.AnchorMiddle)
-					{
-						CCLog.Log("Node warning: setPhysicsBody sets anchor point to CCPoint.AnchorMiddle.");
-						AnchorPoint = CCPoint.AnchorMiddle;
-					}
-				}
+                    // physics rotation based on body position, but node rotation based on node anthor point
+                    // it cann't support both of them, so I clear the anthor point to default.
+                    if (AnchorPoint != CCPoint.AnchorMiddle)
+                    {
+                        CCLog.Log("Node warning: setPhysicsBody sets anchor point to CCPoint.AnchorMiddle.");
+                        AnchorPoint = CCPoint.AnchorMiddle;
+                    }
+                }
 
-				if (_physicsBody != null)
-				{
-					var world = _physicsBody.GetWorld();
-					_physicsBody.RemoveFromWorld();
-					_physicsBody._node = null;
-					//_physicsBody->release();
+                if (_physicsBody != null)
+                {
+                    var world = _physicsBody.GetWorld();
+                    _physicsBody.RemoveFromWorld();
+                    _physicsBody._node = null;
+                    //_physicsBody->release();
 
-					if (world != null && body != null)
-					{
-						world.AddBody(body);
-					}
-				}
+                    if (world != null && body != null)
+                    {
+                        world.AddBody(body);
+                    }
+                }
 
-				_physicsBody = body;
-				_physicsScaleStartX = scaleX;
-				_physicsScaleStartY = scaleY;
+                _physicsBody = body;
+                _physicsScaleStartX = scaleX;
+                _physicsScaleStartY = scaleY;
 
-				if (body != null)
-				{
-					CCNode node;
-					CCScene scene = null;
-					for (node = this.Parent; node != null; node = node.Parent)
-					{
-						CCScene tmpScene = node as CCScene;
-						if (tmpScene != null && tmpScene.PhysicsWorld != null)
-						{
-							scene = tmpScene;
-							break;
-						}
-					}
+                if (body != null)
+                {
+                    CCNode node;
+                    CCScene scene = null;
+                    for (node = this.Parent; node != null; node = node.Parent)
+                    {
+                        CCScene tmpScene = node as CCScene;
+                        if (tmpScene != null && tmpScene.PhysicsWorld != null)
+                        {
+                            scene = tmpScene;
+                            break;
+                        }
+                    }
 
-					if (scene != null)
-					{
+                    if (scene != null)
+                    {
                         UpdatePhysicsBodyTransform(scene);
-						scene.PhysicsWorld.AddBody(body);
-					}
+                        scene.PhysicsWorld.AddBody(body);
+                    }
 
-					UpdatePhysicsBodyTransform(scene);
-				}
+                    UpdatePhysicsBodyTransform(scene);
+                }
 
 
-			}
-		}
+            }
+        }
 
 
 
 
 #endif
 
-		#endregion
+        #endregion
 
 
         #region Event dispatcher handling
 
         internal void AttachEvents()
         {
-			if (EventDispatcher == null)
-				return;
+            if (EventDispatcher == null)
+                return;
 
-            if (toBeAddedListeners != null && toBeAddedListeners.Count > 0) 
+            if (toBeAddedListeners != null && toBeAddedListeners.Count > 0)
             {
                 var eventDispatcher = EventDispatcher;
-                foreach (var listener in toBeAddedListeners) 
+                foreach (var listener in toBeAddedListeners)
                 {
                     if (listener.SceneGraphPriority != null)
-                        eventDispatcher.AddEventListener (listener, listener.SceneGraphPriority);
+                        eventDispatcher.AddEventListener(listener, listener.SceneGraphPriority);
                     else
-                        eventDispatcher.AddEventListener (listener, listener.FixedPriority, this);
+                        eventDispatcher.AddEventListener(listener, listener.FixedPriority, this);
                 }
 
-                toBeAddedListeners.Clear ();
+                toBeAddedListeners.Clear();
                 toBeAddedListeners = null;
             }
         }
@@ -1114,16 +1114,16 @@ namespace CocosSharp
 
         // Hidden event handlers
 
-        void OnSceneViewportChanged (object sender, EventArgs e)
+        void OnSceneViewportChanged(object sender, EventArgs e)
         {
-            if (Scene != null && GameView != null && Camera != null) 
+            if (Scene != null && GameView != null && Camera != null)
             {
-                ViewportChanged ();
-                VisibleBoundsChanged ();
+                ViewportChanged();
+                VisibleBoundsChanged();
             }
         }
 
-        void OnLayerVisibleBoundsChanged (object sender, EventArgs e)
+        void OnLayerVisibleBoundsChanged(object sender, EventArgs e)
         {
             if (Scene != null && Camera != null)
                 VisibleBoundsChanged();
@@ -1152,7 +1152,7 @@ namespace CocosSharp
         {
 
 #if USE_PHYSICS
-			this._physicsBody = null;
+            this._physicsBody = null;
 #endif
             this.Dispose(false);
         }
@@ -1166,7 +1166,7 @@ namespace CocosSharp
 
         protected virtual void Dispose(bool disposing)
         {
-            if(disposing) 
+            if (disposing)
             {
                 // Dispose of managed resources
             }
@@ -1174,8 +1174,14 @@ namespace CocosSharp
             // Want to stop all actions and timers regardless of whether or not this object was explicitly disposed
             this.Cleanup();
 
+            // remove all children from this node recursively
+            if (childrenByTag != null)
+            {
+                childrenByTag.Clear();
+            }
+
             if (EventDispatcher != null)
-                EventDispatcher.RemoveEventListeners (this);
+                EventDispatcher.RemoveEventListeners(this);
 
             // Clean up the UserData and UserObject as these may hold references to other CCNodes.
             UserData = null;
@@ -1184,18 +1190,33 @@ namespace CocosSharp
             if (Children != null && Children.Count > 0)
             {
                 CCNode[] elements = Children.Elements;
-                foreach(CCNode child in Children.Elements)
+                foreach (CCNode child in Children.Elements)
                 {
-                    if (child != null) 
+                    if (child != null)
                     {
-                        if (!child.isCleaned) {
-                            child.OnExit ();
+                        if (!child.isCleaned)
+                        {
+                            child.OnExit();
                         }
-                        child.Parent = null;
                     }
                 }
             }
+            CleanUpParentsProperly();
 
+        }
+
+        public void CleanUpParentsProperly()
+        {
+            if (Children != null && Children.Count > 0)
+            {
+                CCNode[] elements = Children.Elements;
+                foreach (CCNode child in Children.Elements)
+                {
+                    child?.CleanUpParentsProperly();
+                }
+                Children.Clear(true);
+            }
+            Parent = null;
         }
 
         protected virtual void ResetCleanState()
@@ -1213,10 +1234,11 @@ namespace CocosSharp
 
         public virtual void Cleanup()
         {
-            if (isCleaned == true)
+            if (isCleaned)
             {
                 return;
             }
+            isCleaned = true;
 
             // actions
             StopAllActions();
@@ -1229,14 +1251,13 @@ namespace CocosSharp
                 CCNode[] elements = Children.Elements;
                 for (int i = 0, count = Children.Count; i < count; i++)
                 {
-                    elements[i].Cleanup();
+                    elements[i]?.Cleanup();
                 }
             }
 
             Scene = null;
             Layer = null;
             Camera = null;
-            isCleaned = true;
         }
 
         #endregion Cleaning up
@@ -1266,14 +1287,14 @@ namespace CocosSharp
             return transformedPoint;
         }
 
-        public CCPoint ScreenToWorldspace (CCPoint point)
+        public CCPoint ScreenToWorldspace(CCPoint point)
         {
             return Layer.ScreenToWorldspace(point);
         }
 
         public CCRect VisibleBoundsWorldspace
         {
-            get 
+            get
             {
                 return Layer.VisibleBoundsWorldspace;
             }
@@ -1284,7 +1305,7 @@ namespace CocosSharp
 
         #region Serialization
 
-        public virtual void Serialize(Stream stream) 
+        public virtual void Serialize(Stream stream)
         {
             StreamWriter sw = new StreamWriter(stream);
             CCSerialization.SerializeData(Visible, sw);
@@ -1321,10 +1342,10 @@ namespace CocosSharp
             }
         }
 
-        public virtual void Deserialize(Stream stream) 
+        public virtual void Deserialize(Stream stream)
         {
             StreamReader sr = new StreamReader(stream);
-            Visible = CCSerialization.DeSerializeBool(sr); 
+            Visible = CCSerialization.DeSerializeBool(sr);
             rotationX = CCSerialization.DeSerializeFloat(sr);
             rotationY = CCSerialization.DeSerializeFloat(sr);
             scaleX = CCSerialization.DeSerializeFloat(sr);
@@ -1360,7 +1381,7 @@ namespace CocosSharp
 
         public CCNode GetChildByTag(int tag)
         {
-            Debug.Assert(tag != (int) CCNodeTag.Invalid, "Invalid tag");
+            Debug.Assert(tag != (int)CCNodeTag.Invalid, "Invalid tag");
 
             if (childrenByTag != null && childrenByTag.Count > 0)
             {
@@ -1415,12 +1436,12 @@ namespace CocosSharp
             child.Scene = this.Scene;
 
 #if USE_PHYSICS
-			// Recursive add children with which have physics body.
-			if (Scene != null && Scene.PhysicsWorld != null)
-			{
-				child.UpdatePhysicsBodyTransform(Scene);
-				Scene.AddChildToPhysicsWorld(child);
-			}
+            // Recursive add children with which have physics body.
+            if (Scene != null && Scene.PhysicsWorld != null)
+            {
+                child.UpdatePhysicsBodyTransform(Scene);
+                Scene.AddChildToPhysicsWorld(child);
+            }
 #endif
 
             if (IsRunning)
@@ -1445,7 +1466,7 @@ namespace CocosSharp
 
         #region RemoveChild
 
-        public void RemoveFromParent(bool cleanup=true)
+        public void RemoveFromParent(bool cleanup = true)
         {
             if (Parent != null)
             {
@@ -1453,7 +1474,7 @@ namespace CocosSharp
             }
         }
 
-        public virtual void RemoveChild(CCNode child, bool cleanup=true)
+        public virtual void RemoveChild(CCNode child, bool cleanup = true)
         {
             // explicit nil handling
             if (Children == null || child == null)
@@ -1469,9 +1490,9 @@ namespace CocosSharp
             }
         }
 
-        public void RemoveChildByTag(int tag, bool cleanup=true)
+        public void RemoveChildByTag(int tag, bool cleanup = true)
         {
-            Debug.Assert(tag != (int) CCNodeTag.Invalid, "Invalid tag");
+            Debug.Assert(tag != (int)CCNodeTag.Invalid, "Invalid tag");
 
             CCNode child = this[tag];
 
@@ -1485,7 +1506,7 @@ namespace CocosSharp
             }
         }
 
-        public virtual void RemoveAllChildrenByTag(int tag, bool cleanup=true)
+        public virtual void RemoveAllChildrenByTag(int tag, bool cleanup = true)
         {
             Debug.Assert(tag != (int)CCNodeTag.Invalid, "Invalid tag");
             while (true)
@@ -1499,7 +1520,7 @@ namespace CocosSharp
             }
         }
 
-        public virtual void RemoveAllChildren(bool cleanup=true)
+        public virtual void RemoveAllChildren(bool cleanup = true)
         {
             // not using detachChild improves speed here
             if (Children != null && Children.Count > 0)
@@ -1524,10 +1545,10 @@ namespace CocosSharp
                     }
 
 #if USE_PHYSICS
-					if (node._physicsBody != null)
-					{
-						node._physicsBody.RemoveFromWorld();
-					}
+                    if (node._physicsBody != null)
+                    {
+                        node._physicsBody.RemoveFromWorld();
+                    }
 #endif
 
                     if (cleanup)
@@ -1556,10 +1577,10 @@ namespace CocosSharp
 
 #if USE_PHYSICS
 
-			if (child._physicsBody != null)
-			{
-				child._physicsBody.RemoveFromWorld();
-			}
+            if (child._physicsBody != null)
+            {
+                child._physicsBody.RemoveFromWorld();
+            }
 
 #endif
 
@@ -1592,7 +1613,7 @@ namespace CocosSharp
 
             // In the case where zOrders are equivalent, resort to ordering
             // based on when children were added to parent
-            if(compare == 0)
+            if (compare == 0)
                 compare = arrivalIndex.CompareTo(that.arrivalIndex);
 
             return compare;
@@ -1743,30 +1764,30 @@ namespace CocosSharp
             {
 
                 var listenerID = string.Empty;
-                switch (listenerType) 
+                switch (listenerType)
                 {
-                case CCEventListenerType.TOUCH_ONE_BY_ONE:
-                    listenerID = CCEventListenerTouchOneByOne.LISTENER_ID;
-                    break;
-                case CCEventListenerType.TOUCH_ALL_AT_ONCE:
-                    listenerID = CCEventListenerTouchAllAtOnce.LISTENER_ID;
-                    break;
-                case CCEventListenerType.MOUSE:
-                    listenerID = CCEventListenerMouse.LISTENER_ID;
-                    break;
-                case CCEventListenerType.ACCELEROMETER:
-                    listenerID = CCEventListenerAccelerometer.LISTENER_ID;
-                    break;
-                case CCEventListenerType.KEYBOARD:
-                    listenerID = CCEventListenerKeyboard.LISTENER_ID;
-                    break;
-                case CCEventListenerType.GAMEPAD:
-                    listenerID = CCEventListenerGamePad.LISTENER_ID;
-                    break;
+                    case CCEventListenerType.TOUCH_ONE_BY_ONE:
+                        listenerID = CCEventListenerTouchOneByOne.LISTENER_ID;
+                        break;
+                    case CCEventListenerType.TOUCH_ALL_AT_ONCE:
+                        listenerID = CCEventListenerTouchAllAtOnce.LISTENER_ID;
+                        break;
+                    case CCEventListenerType.MOUSE:
+                        listenerID = CCEventListenerMouse.LISTENER_ID;
+                        break;
+                    case CCEventListenerType.ACCELEROMETER:
+                        listenerID = CCEventListenerAccelerometer.LISTENER_ID;
+                        break;
+                    case CCEventListenerType.KEYBOARD:
+                        listenerID = CCEventListenerKeyboard.LISTENER_ID;
+                        break;
+                    case CCEventListenerType.GAMEPAD:
+                        listenerID = CCEventListenerGamePad.LISTENER_ID;
+                        break;
 
-                default:
-                    Debug.Assert (false, "Invalid listener type!");
-                    break;
+                    default:
+                        Debug.Assert(false, "Invalid listener type!");
+                        break;
                 }
 
                 for (int i = 0; i < toBeAddedListeners.Count; i++)
@@ -1929,12 +1950,12 @@ namespace CocosSharp
 
         public virtual void Visit(ref CCAffineTransform parentWorldTransform)
         {
-            if(!Visible)
+            if (!Visible)
                 return;
 
-            if(transformIsDirty)
+            if (transformIsDirty)
                 UpdateTransform();
-            
+
 
             var worldTransform = CCAffineTransform.Identity;
             CCAffineTransform.Concat(ref affineLocalTransform, ref parentWorldTransform, out worldTransform);
@@ -1943,13 +1964,13 @@ namespace CocosSharp
 
             VisitRenderer(ref worldTransform);
 
-            if(Children != null)
+            if (Children != null)
             {
                 var elements = Children.Elements;
-                for(int i = 0, N = Children.Count; i < N; ++i)
+                for (int i = 0, N = Children.Count; i < N; ++i)
                 {
                     var child = elements[i];
-                    if (child.Visible)
+                    if (child != null && child.Visible)
                         child.Visit(ref worldTransform);
                 }
             }
@@ -1964,20 +1985,20 @@ namespace CocosSharp
 
         protected internal virtual void UpdateDisplayedOpacity(byte parentOpacity)
         {
-            displayedOpacity = (byte) (RealOpacity * parentOpacity / 255.0f);
+            displayedOpacity = (byte)(RealOpacity * parentOpacity / 255.0f);
 
             UpdateColor();
 
             if (IsOpacityCascaded && Children != null)
             {
-                foreach(CCNode node in Children)
+                foreach (CCNode node in Children)
                 {
                     node.UpdateDisplayedOpacity(DisplayedOpacity);
                 }
             }
         }
 
-        protected internal virtual void UpdateCascadeOpacity ()
+        protected internal virtual void UpdateCascadeOpacity()
         {
             byte parentOpacity = 255;
             var pParent = Parent;
@@ -1993,7 +2014,7 @@ namespace CocosSharp
         {
             DisplayedOpacity = RealOpacity;
 
-            foreach(CCNode node in Children.Elements)
+            foreach (CCNode node in Children.Elements)
             {
                 node.UpdateDisplayedOpacity(255);
             }
@@ -2016,7 +2037,7 @@ namespace CocosSharp
             {
                 if (IsOpacityCascaded && Children != null)
                 {
-                    foreach(CCNode node in Children)
+                    foreach (CCNode node in Children)
                     {
                         if (node != null)
                         {
@@ -2082,7 +2103,7 @@ namespace CocosSharp
                     elements[i].OnEnterTransitionDidFinish();
                     elements[i].AttachEvents();
                     elements[i].AttachActions();
-                    elements[i].AttachSchedules ();
+                    elements[i].AttachSchedules();
                 }
             }
         }
@@ -2110,7 +2131,7 @@ namespace CocosSharp
                 CCNode[] elements = Children.Elements;
                 for (int i = 0, count = Children.Count; i < count; i++)
                 {
-                    elements[i].OnExit();
+                    elements[i]?.OnExit();
                 }
             }
         }
@@ -2120,64 +2141,64 @@ namespace CocosSharp
 
         #region Actions
 
-		internal void AttachActions()
-		{
-			if (toBeAddedActions != null && toBeAddedActions.Count > 0) 
-			{
-				var actionManger = ActionManager;
-				foreach (var action in toBeAddedActions) 
-				{
-					ActionManager.AddAction(action.Action, action.Target, action.Paused);
-				}
+        internal void AttachActions()
+        {
+            if (toBeAddedActions != null && toBeAddedActions.Count > 0)
+            {
+                var actionManger = ActionManager;
+                foreach (var action in toBeAddedActions)
+                {
+                    ActionManager.AddAction(action.Action, action.Target, action.Paused);
+                }
 
-				toBeAddedActions.Clear ();
-				toBeAddedActions = null;
-			}
-		}
+                toBeAddedActions.Clear();
+                toBeAddedActions = null;
+            }
+        }
 
-		CCActionState AddLazyAction (CCAction action, CCNode target, bool paused = false)
-		{
-			if (toBeAddedActions == null)
-				toBeAddedActions = new List<lazyAction>();
+        CCActionState AddLazyAction(CCAction action, CCNode target, bool paused = false)
+        {
+            if (toBeAddedActions == null)
+                toBeAddedActions = new List<lazyAction>();
 
-			toBeAddedActions.Add(new lazyAction(action, target, paused));
-			return null;
-		}
+            toBeAddedActions.Add(new lazyAction(action, target, paused));
+            return null;
+        }
 
         public void AddAction(CCAction action, bool paused = false)
         {
-			if (ActionManager != null)
-				ActionManager.AddAction(action, this, paused);
-			else
-				AddLazyAction(action, this, paused);
+            if (ActionManager != null)
+                ActionManager.AddAction(action, this, paused);
+            else
+                AddLazyAction(action, this, paused);
         }
 
         public void AddActions(bool paused, params CCFiniteTimeAction[] actions)
         {
-			if (ActionManager != null)
-				ActionManager.AddAction(new CCSequence(actions), this, paused);
-			else
-				AddLazyAction(new CCSequence(actions), this, paused);
+            if (ActionManager != null)
+                ActionManager.AddAction(new CCSequence(actions), this, paused);
+            else
+                AddLazyAction(new CCSequence(actions), this, paused);
         }
 
         public CCActionState Repeat(uint times, params CCFiniteTimeAction[] actions)
         {
-            return RunAction (new CCRepeat (new CCSequence(actions), times));
+            return RunAction(new CCRepeat(new CCSequence(actions), times));
         }
 
-        public CCActionState Repeat (uint times, CCFiniteTimeAction action)
+        public CCActionState Repeat(uint times, CCFiniteTimeAction action)
         {
-            return RunAction (new CCRepeat (action, times));
+            return RunAction(new CCRepeat(action, times));
         }
 
         public CCActionState RepeatForever(params CCFiniteTimeAction[] actions)
         {
-            return RunAction(new CCRepeatForever (actions));
+            return RunAction(new CCRepeatForever(actions));
         }
 
         public CCActionState RepeatForever(CCFiniteTimeAction action)
         {
-            return RunAction(new CCRepeatForever (action) { Tag = action.Tag });
+            return RunAction(new CCRepeatForever(action) { Tag = action.Tag });
         }
 
         public CCActionState RunAction(CCAction action)
@@ -2196,12 +2217,12 @@ namespace CocosSharp
 
             Debug.Assert(action != null, "Argument must be non-nil");
 
-            var tcs = new TaskCompletionSource<CCActionState> ();
+            var tcs = new TaskCompletionSource<CCActionState>();
 
             CCActionState state = null;
-            var asyncAction = new CCSequence (action, new CCCallFunc (() => tcs.TrySetResult (state)));
+            var asyncAction = new CCSequence(action, new CCCallFunc(() => tcs.TrySetResult(state)));
 
-            state = ActionManager != null ? ActionManager.AddAction (asyncAction, this, !IsRunning) : AddLazyAction(asyncAction, this, !IsRunning);
+            state = ActionManager != null ? ActionManager.AddAction(asyncAction, this, !IsRunning) : AddLazyAction(asyncAction, this, !IsRunning);
 
             return tcs.Task;
         }
@@ -2209,10 +2230,10 @@ namespace CocosSharp
         public CCActionState RunActions(params CCFiniteTimeAction[] actions)
         {
             Debug.Assert(actions != null, "Argument must be non-nil");
-			Debug.Assert(actions.Length > 0, "Paremeter: actions has length of zero. At least one action must be set to run.");
-			var action = actions.Length > 1 ? new CCSequence(actions) : actions[0];
+            Debug.Assert(actions.Length > 0, "Paremeter: actions has length of zero. At least one action must be set to run.");
+            var action = actions.Length > 1 ? new CCSequence(actions) : actions[0];
 
-            return ActionManager != null ? ActionManager.AddAction (action, this, !IsRunning) : AddLazyAction(action, this, !IsRunning);
+            return ActionManager != null ? ActionManager.AddAction(action, this, !IsRunning) : AddLazyAction(action, this, !IsRunning);
         }
 
         /// <summary>
@@ -2224,49 +2245,49 @@ namespace CocosSharp
             Debug.Assert(actions != null, "Argument must be non-nil");
             Debug.Assert(actions.Length > 0, "Paremeter: actions has length of zero. At least one action must be set to run.");
 
-            var tcs = new TaskCompletionSource<CCActionState> ();
+            var tcs = new TaskCompletionSource<CCActionState>();
 
             var numActions = actions.Length;
             var asyncActions = new CCFiniteTimeAction[actions.Length + 1];
-            Array.Copy (actions, asyncActions, numActions);
+            Array.Copy(actions, asyncActions, numActions);
 
             CCActionState state = null;
-            asyncActions [numActions] = new CCCallFunc (() => tcs.TrySetResult (state));
+            asyncActions[numActions] = new CCCallFunc(() => tcs.TrySetResult(state));
 
             var asyncAction = asyncActions.Length > 1 ? new CCSequence(asyncActions) : asyncActions[0];
 
-            state = ActionManager != null ? ActionManager.AddAction (asyncAction, this, !IsRunning) : AddLazyAction(asyncAction, this, !IsRunning);
-               
+            state = ActionManager != null ? ActionManager.AddAction(asyncAction, this, !IsRunning) : AddLazyAction(asyncAction, this, !IsRunning);
+
             return tcs.Task;
         }
 
         public void StopAllActions()
         {
-            if(ActionManager != null)
+            if (ActionManager != null)
                 ActionManager.RemoveAllActionsFromTarget(this);
         }
 
         public void StopAction(CCActionState actionState)
         {
-            if(ActionManager != null)
+            if (ActionManager != null)
                 ActionManager.RemoveAction(actionState);
         }
 
         public void StopAction(int tag)
         {
-            Debug.Assert(tag != (int) CCNodeTag.Invalid, "Invalid tag");
+            Debug.Assert(tag != (int)CCNodeTag.Invalid, "Invalid tag");
             ActionManager.RemoveAction(tag, this);
         }
 
         public CCAction GetAction(int tag)
         {
-            Debug.Assert(tag != (int) CCNodeTag.Invalid, "Invalid tag");
+            Debug.Assert(tag != (int)CCNodeTag.Invalid, "Invalid tag");
             return ActionManager.GetAction(tag, this);
         }
 
         public CCActionState GetActionState(int tag)
         {
-            Debug.Assert(tag != (int) CCNodeTag.Invalid, "Invalid tag");
+            Debug.Assert(tag != (int)CCNodeTag.Invalid, "Invalid tag");
             return ActionManager.GetActionState(tag, this);
         }
 
@@ -2277,23 +2298,23 @@ namespace CocosSharp
 
         internal void AttachSchedules()
         {
-            if (toBeAddedSchedules != null && toBeAddedSchedules.Count > 0) 
+            if (toBeAddedSchedules != null && toBeAddedSchedules.Count > 0)
             {
                 var scheduler = Scheduler;
-                foreach (var schedule in toBeAddedSchedules) 
+                foreach (var schedule in toBeAddedSchedules)
                 {
                     if (schedule.IsPriority)
-                        scheduler.Schedule (schedule.Target, schedule.Priority, schedule.Paused);
+                        scheduler.Schedule(schedule.Target, schedule.Priority, schedule.Paused);
                     else
                         scheduler.Schedule(schedule.Selector, schedule.Target, schedule.Interval, schedule.Repeat, schedule.Delay, schedule.Paused);
                 }
 
-                toBeAddedSchedules.Clear ();
+                toBeAddedSchedules.Clear();
                 toBeAddedSchedules = null;
             }
         }
 
-        void AddLazySchedule (Action<float> selector, ICCUpdatable target, float interval, uint repeat, float delay, bool paused)
+        void AddLazySchedule(Action<float> selector, ICCUpdatable target, float interval, uint repeat, float delay, bool paused)
         {
             if (toBeAddedSchedules == null)
                 toBeAddedSchedules = new List<lazySchedule>();
@@ -2301,7 +2322,7 @@ namespace CocosSharp
             toBeAddedSchedules.Add(new lazySchedule(selector, target, interval, repeat, delay, paused));
         }
 
-        void AddLazySchedule (ICCUpdatable target, int priority, bool paused)
+        void AddLazySchedule(ICCUpdatable target, int priority, bool paused)
         {
             if (toBeAddedSchedules == null)
                 toBeAddedSchedules = new List<lazySchedule>();
@@ -2317,43 +2338,43 @@ namespace CocosSharp
         public void Schedule(int priority)
         {
             if (Scheduler != null)
-                Scheduler.Schedule (this, priority, !IsRunning);
+                Scheduler.Schedule(this, priority, !IsRunning);
             else
-                AddLazySchedule (this, priority, !IsRunning);
+                AddLazySchedule(this, priority, !IsRunning);
         }
 
-        public void Unschedule ()
+        public void Unschedule()
         {
-            Scheduler.Unschedule (this);
+            Scheduler.Unschedule(this);
         }
 
-        public void Schedule (Action<float> selector)
+        public void Schedule(Action<float> selector)
         {
-            Schedule (selector, 0.0f, CCSchedulePriority.RepeatForever, 0.0f);
+            Schedule(selector, 0.0f, CCSchedulePriority.RepeatForever, 0.0f);
         }
 
-        public void Schedule (Action<float> selector, float interval)
+        public void Schedule(Action<float> selector, float interval)
         {
-            Schedule (selector, interval, CCSchedulePriority.RepeatForever, 0.0f);
+            Schedule(selector, interval, CCSchedulePriority.RepeatForever, 0.0f);
         }
 
-        public void Schedule (Action<float> selector, float interval, uint repeat, float delay)
+        public void Schedule(Action<float> selector, float interval, uint repeat, float delay)
         {
-            Debug.Assert (selector != null, "Argument must be non-nil");
-            Debug.Assert (interval >= 0, "Argument must be positive");
+            Debug.Assert(selector != null, "Argument must be non-nil");
+            Debug.Assert(interval >= 0, "Argument must be positive");
 
             if (Scheduler != null)
-                Scheduler.Schedule (selector, this, interval, repeat, delay, !IsRunning);
+                Scheduler.Schedule(selector, this, interval, repeat, delay, !IsRunning);
             else
-                AddLazySchedule (selector, this, interval, repeat, delay, !IsRunning);
+                AddLazySchedule(selector, this, interval, repeat, delay, !IsRunning);
         }
 
-        public void ScheduleOnce (Action<float> selector, float delay)
+        public void ScheduleOnce(Action<float> selector, float delay)
         {
-            Schedule (selector, 0.0f, 0, delay);
+            Schedule(selector, 0.0f, 0, delay);
         }
 
-        public void Unschedule (Action<float> selector)
+        public void Unschedule(Action<float> selector)
         {
             // explicit nil handling
             if (selector == null)
@@ -2376,12 +2397,12 @@ namespace CocosSharp
                 }
             }
             else
-                Scheduler.Unschedule (selector, this);
+                Scheduler.Unschedule(selector, this);
         }
 
-        public void UnscheduleAll ()
+        public void UnscheduleAll()
         {
-            if(Scheduler != null)
+            if (Scheduler != null)
                 Scheduler.UnscheduleAll(this);
         }
 
@@ -2402,7 +2423,7 @@ namespace CocosSharp
             if (ActionManager != null)
                 ActionManager.PauseTarget(this);
             if (EventDispatcher != null)
-                EventDispatcher.Pause (this);
+                EventDispatcher.Pause(this);
         }
 
         #endregion Scheduling
@@ -2473,8 +2494,8 @@ namespace CocosSharp
             if (needsSkewMatrix)
             {
                 var skewMatrix = new CCAffineTransform(
-                    1.0f, (float) Math.Tan(CCMacros.CCDegreesToRadians(skewY)),
-                    (float) Math.Tan(CCMacros.CCDegreesToRadians(skewX)), 1.0f,
+                    1.0f, (float)Math.Tan(CCMacros.CCDegreesToRadians(skewY)),
+                    (float)Math.Tan(CCMacros.CCDegreesToRadians(skewX)), 1.0f,
                     0.0f, 0.0f);
 
                 CCAffineTransform.Concat(ref skewMatrix, ref affineLocalTransform, out affineLocalTransform);
@@ -2492,9 +2513,9 @@ namespace CocosSharp
 
             Matrix fauxLocalCameraTransform = Matrix.Identity;
 
-            if(FauxLocalCameraCenter != FauxLocalCameraTarget)
+            if (FauxLocalCameraCenter != FauxLocalCameraTarget)
             {
-                fauxLocalCameraTransform =  Matrix.CreateLookAt(
+                fauxLocalCameraTransform = Matrix.CreateLookAt(
                     new Vector3(FauxLocalCameraCenter.X, FauxLocalCameraCenter.Y, FauxLocalCameraCenter.Z),
                     new Vector3(FauxLocalCameraTarget.X, FauxLocalCameraTarget.Y, FauxLocalCameraTarget.Z),
                     new Vector3(FauxLocalCameraUpDirection.X, FauxLocalCameraUpDirection.Y, FauxLocalCameraUpDirection.Z));
@@ -2525,6 +2546,11 @@ namespace CocosSharp
 
         public virtual void KeyMenuClicked()
         {
+        }
+
+        public virtual void Boobies()
+        {
+            Console.WriteLine("----->Boobies!!<------");
         }
     }
 }

@@ -339,17 +339,30 @@ namespace CocosSharp
 			count = neededLength;
 		}
 
-		#endregion Adding and inserting
+        #endregion Adding and inserting
 
 
-		#region Removing
+        #region Removing
 
-		public void Clear()
-		{
-			count = 0;
-		}
+        public void Clear()
+        {
+            Clear(false);
+        }
 
-		public void Free()
+        public void Clear(bool fullClear)
+        {
+            count = 0;
+            if(fullClear)
+            {
+                if(Elements != null && UseArrayPool)
+                {
+                    ArrayPool<T>.Free(Elements);
+                }
+                Elements = null;
+            }
+        }
+
+        public void Free()
 		{
 			if (Elements != null && UseArrayPool)
 			{
