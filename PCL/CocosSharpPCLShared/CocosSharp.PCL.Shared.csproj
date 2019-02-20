@@ -42,8 +42,8 @@
       <ItemGroup>
           <_CopyItems Include="$(ProjectDir)bin\$(Configuration)\*.dll" />
       </ItemGroup>
-      <Copy SourceFiles="@(_CopyItems)" DestinationFolder="$(ProjectDir)..\app_c_sharp_exercise_engine\Cocos\PCL\" ContinueOnError="false" />
-      <Message Text="Copy dlls from $(ProjectDir)bin\Android\$(Configuration)\*.dll to folder $(ProjectDir)..\app_c_sharp_exercise_engine\Cocos\PCL\" />
+      <Copy SourceFiles="@(_CopyItems)" DestinationFolder="$(ProjectDir)..\..\app_c_sharp_exercise_engine\Cocos\PCL\" ContinueOnError="false" />
+      <Message Text="Copy dlls from $(ProjectDir)bin\Android\$(Configuration)\*.dll to folder $(ProjectDir)..\..\app_c_sharp_exercise_engine\Cocos\PCL\" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\MonoGamePCLShared\MonoGame.PCL.Shared.csproj">
