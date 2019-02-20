@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -79,6 +79,13 @@
   </ItemGroup>
   <!--Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" Condition="'$(windir)' != '' " /-->
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Target Name="AfterBuild">
+      <ItemGroup>
+          <_CopyItems Include="$(ProjectDir)bin\$(Platform)\$(Configuration)\*.dll" />
+      </ItemGroup>
+      <Copy SourceFiles="@(_CopyItems)" DestinationFolder="$(ProjectDir)..\app_c_sharp_exercise_engine\Cocos\$(Platform)\" ContinueOnError="false" />
+      <Message Text="Copy dlls from $(ProjectDir)bin\$(Platform)\$(Configuration)\*.dll to folder $(ProjectDir)..\app_c_sharp_exercise_engine\Cocos\$(Platform)\"/>
+  </Target>
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
