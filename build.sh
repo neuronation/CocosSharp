@@ -3,7 +3,7 @@
 echo "update all submodules"
 git submodule update --init
 echo "create buildable monogame projects"
-#cd Monogame/
+cd Monogame/
 mono Protobuild.exe
 cd ../
 echo "replace so files for android monogame"
