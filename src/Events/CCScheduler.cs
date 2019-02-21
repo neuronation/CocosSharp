@@ -227,7 +227,7 @@ namespace CocosSharp
 
             try
             {
-                if (TimeScale != 1.0f)
+                if (Math.Abs (TimeScale - 1.0f) > float.Epsilon)
                 {
                     dt *= TimeScale;
                 }
@@ -279,7 +279,7 @@ namespace CocosSharp
                     for (int i = 0; i < count; i++)
                     {
                         ICCUpdatable key = tmpSelectorArray[i];
-                        if (!hashForTimers.ContainsKey(key))
+                        if (key == null || !hashForTimers.ContainsKey(key))
                         {
                             continue;
                         }
@@ -346,7 +346,9 @@ namespace CocosSharp
                     }
                 }
             }
-            finally
+            catch(Exception ex) {
+                System.Diagnostics.Debug.WriteLine (ex.Message);
+            } finally
             {
                 // Always do this just in case there is a problem
 

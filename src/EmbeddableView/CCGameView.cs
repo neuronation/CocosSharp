@@ -568,7 +568,7 @@ namespace CocosSharp
                 Director.SetNextScene();
 
             CCScheduler.SharedScheduler.Update(deltaTime);
-            ActionManager.Update(deltaTime);
+            ActionManager?.Update(deltaTime);
 
             ProcessInput();
 
