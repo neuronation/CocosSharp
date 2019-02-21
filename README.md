@@ -1,3 +1,7 @@
+# NN Integration
+
+To fully load the app we have included a script - build.sh - which, when executed, will load all necessary submodules and setup the full MonoGame environment as well.
+
 # CocosSharp
 
 CocosSharp is an easy to use library for simple games using C# and F#.
