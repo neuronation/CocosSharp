@@ -281,9 +281,9 @@ namespace CocosSharp
         public void PlatformUpdatePaused()
         {
             if (Paused)
-                timeSource.Suspend();
+                timeSource?.Suspend();
             else
-                timeSource.Resume();
+                timeSource?.Resume();
 
             MobilePlatformUpdatePaused();
         }
