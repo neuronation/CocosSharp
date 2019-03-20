@@ -204,8 +204,12 @@ namespace CocosSharp
         internal void DeleteHashElement(HashElement element)
         {
             element.ActionStates.Clear();
-            targets.Remove(element.Target);
-            element.Target = null;
+            // target can be null, if DeleteHashElement is called twice on the sme element
+            if (element.Target != null) 
+            {
+                targets.Remove(element.Target);
+                element.Target = null;
+            }
             targetsAvailable = targets.Count > 0;
         }
 
