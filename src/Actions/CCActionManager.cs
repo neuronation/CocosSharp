@@ -229,7 +229,7 @@ namespace CocosSharp
             HashElement element;
             if (targets.TryGetValue(target, out element))
             {
-                element.Paused = true;
+                element?.Paused = true;
             }
         }
 
@@ -238,7 +238,7 @@ namespace CocosSharp
             HashElement element;
             if (targets.TryGetValue(target, out element))
             {
-                element.Paused = false;
+                element?.Paused = false;
             }
         }
 
@@ -248,7 +248,7 @@ namespace CocosSharp
 
             foreach (var element in targets.Values)
             {
-                if (!element.Paused)
+                if (element != null && !element.Paused)
                 {
                     element.Paused = true;
                     idsWithActions.Add(element.Target);
