@@ -124,17 +124,20 @@ namespace CocosSharp
                 if (gameStarted && paused != value)
                 {
                     paused = value;
-                    previousTicks = gameTimer.Elapsed.Ticks;
+                    if (gameTimer != null) 
+                    {
+                        previousTicks = gameTimer.Elapsed.Ticks;
+                    }
 
                     if (paused) 
                     {
-                        AudioEngine.PauseBackgroundMusic();
-                        AudioEngine.PauseAllEffects();
+                        AudioEngine?.PauseBackgroundMusic();
+                        AudioEngine?.PauseAllEffects();
                     } 
                     else 
                     {
-                        AudioEngine.ResumeBackgroundMusic();
-                        AudioEngine.ResumeAllEffects();
+                        AudioEngine?.ResumeBackgroundMusic();
+                        AudioEngine?.ResumeAllEffects();
                     }
                     
                     PlatformUpdatePaused();
