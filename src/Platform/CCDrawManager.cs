@@ -679,9 +679,14 @@ namespace CocosSharp
                 EffectPassCollection passes = currentEffect.CurrentTechnique.Passes;
                 for (int i = 0; i < passes.Count; i++) 
                 {
-                    passes[i].Apply();
-                    graphicsDevice.DrawUserIndexedPrimitives(
-                        PrimitiveType.TriangleList, quadsVertices, 0, nIteration * NumOfVerticesPerQuad, quadsIndices, 0, nIteration * 2);
+                    try {
+                        passes [i].Apply();
+                        graphicsDevice.DrawUserIndexedPrimitives(
+                            PrimitiveType.TriangleList, quadsVertices, 0, nIteration * NumOfVerticesPerQuad, quadsIndices, 0, nIteration * 2);
+                    }
+                    catch(Exception e) {
+                        // don't crash
+                    }
                 }
 
                 n -= nIteration;
