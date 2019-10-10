@@ -25,6 +25,7 @@ mkdir -p "MonoGame/ThirdParty/Dependencies/openal-soft/libs/x86_64"
 cp -rf "nn_patch/x86_64/libopenal32.so" "MonoGame/ThirdParty/Dependencies/openal-soft/libs/x86_64"
 mkdir -p "MonoGame/ThirdParty/Dependencies/openal-soft/libs/arm64-v8a"
 cp -rf "nn_patch/arm64-v8a/libopenal32.so" "MonoGame/ThirdParty/Dependencies/openal-soft/libs/arm64-v8a"
+cp -rf "nn_patch/MonoGame.Framework.Net.Android.csproj" "MonoGame/MonoGame.Framework/MonoGame.Framework.Net.Android.csproj"
 
 echo "get latest version of the exercise engine"
 cd app_c_sharp_exercise_engine/
