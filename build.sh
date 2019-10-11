@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 MUSTBUILD="0"
 while [ "$1" != "" ]; do
     case $1 in
