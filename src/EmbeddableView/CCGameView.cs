@@ -491,13 +491,19 @@ namespace CocosSharp
 
             if (runningScene != null) 
             {
-                Renderer.PushViewportGroup(ref vp);
+                try {
+                    Renderer.PushViewportGroup(ref vp);
 
-                runningScene.Visit();
+                    runningScene.Visit();
 
-                Renderer.PopViewportGroup();
+                    Renderer.PopViewportGroup();
 
-                Renderer.VisitRenderQueue();
+                    Renderer.VisitRenderQueue();
+                }
+                catch(Exception e)
+                {
+                    LogMessage ("CCGameView: " + e.Message);
+                }
             }
 
             if (Stats.Enabled)
@@ -580,6 +586,10 @@ namespace CocosSharp
 
         #endregion Run loop
 
+        protected virtual void LogMessage(string msg)
+        {
+            System.Diagnostics.Debug.WriteLine ("CCGameView: " + msg);
+        }
     }
 }
 
