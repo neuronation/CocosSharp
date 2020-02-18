@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using CocosSharp;
@@ -161,8 +162,8 @@ namespace CocosSharp
         static HashTimeEntry[] tmpHashSelectorArray = new HashTimeEntry[128];
 		static ICCUpdatable[] tmpSelectorArray = new ICCUpdatable[128];
 
-		readonly Dictionary<ICCUpdatable, HashTimeEntry> hashForTimers = new Dictionary<ICCUpdatable, HashTimeEntry>();
-		readonly Dictionary<ICCUpdatable, HashUpdateEntry> hashForUpdates = new Dictionary<ICCUpdatable, HashUpdateEntry>();
+		readonly ConcurrentDictionary<ICCUpdatable, HashTimeEntry> hashForTimers = new ConcurrentDictionary<ICCUpdatable, HashTimeEntry>();
+		readonly ConcurrentDictionary<ICCUpdatable, HashUpdateEntry> hashForUpdates = new ConcurrentDictionary<ICCUpdatable, HashUpdateEntry>();
 
         // hash used to fetch quickly the list entries for pause,delete,etc
 		readonly LinkedList<ListEntry> updates0List = new LinkedList<ListEntry>(); 		// list priority == 0
@@ -764,7 +765,7 @@ namespace CocosSharp
 
         void RemoveHashElement(HashTimeEntry element)
         {
-            hashForTimers.Remove(element.Target);
+            hashForTimers.TryRemove(element.Target, out _);
 
             element.Timers.Clear();
             element.Target = null;
@@ -779,8 +780,8 @@ namespace CocosSharp
                 element.List.Remove(entry);
                 element.Entry = null;
 
-                // hash entry
-                hashForUpdates.Remove(entry.Target);
+                // hash entry        
+                hashForUpdates.TryRemove(entry.Target, out _);
 
                 element.Target = null;
             }
@@ -827,7 +828,7 @@ namespace CocosSharp
                     Entry = listElement
                 };
 
-            hashForUpdates.Add(target, hashElement);
+            hashForUpdates.TryAdd(target, hashElement);
         }
 
         void AppendIn(LinkedList<ListEntry> list, ICCUpdatable target, bool paused)
@@ -849,7 +850,7 @@ namespace CocosSharp
                     Entry = listElement
                 };
 
-            hashForUpdates.Add(target, hashElement);
+            hashForUpdates.TryAdd(target, hashElement);
         }
 
         #region Nested type: HashSelectorEntry
