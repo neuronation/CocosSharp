@@ -317,10 +317,12 @@ namespace CocosSharp
 
         void PlatformPresent()
         {
-            if (graphicsDevice != null)
-                graphicsDevice.Present();
+            try {
+                if (graphicsDevice != null)
+                    graphicsDevice.Present();
 
-            SwapBuffers();
+                SwapBuffers();
+            } catch (Exception) { }
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
