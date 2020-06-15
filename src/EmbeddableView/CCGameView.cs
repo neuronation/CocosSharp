@@ -577,21 +577,31 @@ namespace CocosSharp
 
         void Update(GameTime time)
         {
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            try {
+                float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Stats.UpdateStart();
+                Stats.UpdateStart();
 
-            SoundEffectInstancePool.Update();
+                SoundEffectInstancePool.Update();
 
-            if (Director.NextScene != null)
-                Director.SetNextScene();
+                if (Director.NextScene != null)
+                    Director.SetNextScene();
 
-            CCScheduler.SharedScheduler.Update(deltaTime);
-            ActionManager?.Update(deltaTime);
+                CCScheduler.SharedScheduler.Update(deltaTime);
+                ActionManager?.Update(deltaTime);
 
-            ProcessInput();
+                ProcessInput();
 
-            Stats.UpdateEnd(deltaTime);
+                Stats.UpdateEnd(deltaTime);
+            }
+            catch (Exception e) {
+                string msg = new System.Text.StringBuilder ()
+                    .AppendLine ($"Draw.Stats.Enabled : {e.Message}")
+                    .AppendLine ($"Stack Trace: {e.StackTrace}")
+                    .ToString ();
+
+                LogMessage (msg);
+            }
         }
 
         #endregion Run loop
