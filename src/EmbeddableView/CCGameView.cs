@@ -508,18 +508,28 @@ namespace CocosSharp
 
             if (Stats.Enabled)
             {
-                Renderer.PushGroup();
-                Renderer.PushViewportGroup(ref defaultViewport);
-                Renderer.PushLayerGroup(ref defaultViewMatrix, ref defaultProjMatrix);
+                try {
+                    Renderer.PushGroup();
+                    Renderer.PushViewportGroup(ref defaultViewport);
+                    Renderer.PushLayerGroup(ref defaultViewMatrix, ref defaultProjMatrix);
 
-                DrawManager.UpdateStats();
-                Stats.Draw(this);
+                    DrawManager.UpdateStats();
+                    Stats.Draw(this);
 
-                Renderer.PopLayerGroup();
-                Renderer.PopViewportGroup();
-                Renderer.PopGroup();
+                    Renderer.PopLayerGroup();
+                    Renderer.PopViewportGroup();
+                    Renderer.PopGroup();
 
-                Renderer.VisitRenderQueue();
+                    Renderer.VisitRenderQueue();
+                }
+                catch (Exception e) {
+                    string msg = new System.Text.StringBuilder ()
+                    .AppendLine ($"Draw.Stats.Enabled : {e.Message}")
+                    .AppendLine ($"Stack Trace: {e.StackTrace}")
+                    .ToString ();
+
+                    LogMessage (msg);
+                }
             } 
 
             DrawManager.EndDraw();

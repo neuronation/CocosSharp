@@ -290,14 +290,25 @@ namespace CocosSharp
 
         internal void RunIteration(NSTimer timer)
         {
+            if (timeSource == null) return;
             if (GL.GetErrorCode() != ErrorCode.NoError)
                 return;
 
-            OnUpdateFrame(null);
+            try {
+                OnUpdateFrame(null);
 
-            GL.BindFramebuffer(FramebufferTarget.Framebuffer, Framebuffer);
+                GL.BindFramebuffer(FramebufferTarget.Framebuffer, Framebuffer);
 
-            OnRenderFrame(null);
+                OnRenderFrame(null);
+            }
+            catch (Exception e) {
+                string msg = new System.Text.StringBuilder ()
+                    .AppendLine ($"iOS.RunIteration : {e.Message}")
+                    .AppendLine ($"Stack Trace: {e.StackTrace}")
+                    .ToString ();
+
+                LogMessage (msg);
+            }
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
